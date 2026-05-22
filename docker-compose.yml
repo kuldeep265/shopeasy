@@ -1,0 +1,38 @@
+
+
+services:
+
+  frontend:
+    image: shopeasy-frontend:latest
+    container_name: frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+
+  backend:
+    image: springcommunity/spring-petclinic-rest
+    container_name: backend
+    ports:
+      - "8081:9966"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: shopeasy
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
