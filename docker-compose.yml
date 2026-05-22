@@ -1,26 +1,36 @@
-
-
 services:
 
   frontend:
-    image: shopeasy-frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    image: kuldeep7860/shopeasy-frontend:latest
+
     container_name: frontend
+
     ports:
       - "3001:80"
+
     depends_on:
       - backend
 
   backend:
     image: springcommunity/spring-petclinic-rest
+
     container_name: backend
+
     ports:
       - "8081:9966"
+
     depends_on:
       - postgres
 
   postgres:
     image: postgres:15
+
     container_name: postgres
+
     restart: always
 
     environment:
