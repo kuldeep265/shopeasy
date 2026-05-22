@@ -10,9 +10,10 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/kuldeep265/shopeasy.git'
+            git branch: 'main',
+            url: 'https://github.com/kuldeep265/shopeasy.git'
             }
-        }
+}
 
         stage('Build Frontend Image') {
             steps {
